@@ -1,6 +1,10 @@
 package com.jrd.timedmailsender;
 
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
+
 import java.io.*;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 /**
@@ -30,5 +34,27 @@ public class FileManager {
 
         reader.close();
         return result;
+    }
+
+
+
+    public String getLatestReportFile(String directoryPath) {
+        String ext = "csv";
+        LOGGER.info("!getTheNewestFileName.agregatedFilePath = " + directoryPath);
+        String filePath = directoryPath
+
+        File theNewestFile = null;
+        File dir = new File(filePath);
+        FileFilter fileFilter = new WildcardFileFilter("*." + ext);
+        File[] files = dir.listFiles(fileFilter);
+
+        if (files != null && files.length > 0) {
+            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+            theNewestFile = files[0];
+        }
+
+        if (theNewestFile != null) {
+            this.agregatedFileName = this.agregatedFilePath + theNewestFile.getName();
+        }
     }
 }
