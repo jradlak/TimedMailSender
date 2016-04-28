@@ -16,7 +16,7 @@ public class ConfigurationTest {
     @Test
     public void configTest() throws IOException {
         Configuration configuration = new Configuration("mailSender.properties");
-        String server = configuration.getProperty("mail.server");
+        String server = configuration.getProperty("mail.smtp.host");
         Assert.assertTrue(mailServerAddres.equals(server));
     }
 }

@@ -10,6 +10,20 @@ import java.util.Properties;
  */
 public class Configuration {
 
+    public static class Keys {
+        public static final String mail_smtp_auth= "mail.smtp.auth";
+        public static final String mail_smtp_starttls_enable = "mail.smtp.starttls.enable";
+        public static final String mail_smtp_host = "mail.smtp.host";
+        public static final String mail_smtp_port = "mail.smtp.port";
+        public static final String mail_from = "mail.from";
+        public static final String mail_to = "mail.to";
+        public static final String mail_subject = "mail.subject";
+        public static final String mail_username = "mail.username";
+        public static final String mail_password = "mail.password";
+        public static final String file_template = "file.template";
+        public static final String file_report_path = "file.report.path";
+    }
+
     Properties properties;
 
     public Configuration(String propertiesFileName) throws IOException {
