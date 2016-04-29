@@ -20,8 +20,7 @@ public class MailSenderTest {
     @Before
     public void setup() throws IOException {
         configuration = new Configuration("mailSender.properties");
-        fileManager = new FileManager();
-        mailSender = new MailSender(configuration, fileManager);
+        mailSender = new MailSender(configuration);
     }
 
     @Test

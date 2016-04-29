@@ -15,21 +15,18 @@ import java.util.logging.Logger;
  * Created by jakub on 27.04.16.
  */
 public class MailSender {
+
     private Logger LOGGER = Logger.getLogger(MailSender.class.getName());
 
     private Configuration configuration;
 
-    private FileManager fileManager;
-
-    public MailSender(Configuration configuration, FileManager fileManager) {
+    public MailSender(Configuration configuration) {
         this.configuration = configuration;
-        this.fileManager = fileManager;
     }
 
     public void sendMail(String messageStr, String attachmentFileName) throws MessagingException {
         final String username = configuration.getProperty(Configuration.Keys.mail_username);
         final String password = configuration.getProperty(Configuration.Keys.mail_password);
-
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", configuration.getProperty(Configuration.Keys.mail_smtp_auth));

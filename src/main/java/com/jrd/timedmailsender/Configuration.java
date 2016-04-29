@@ -22,6 +22,7 @@ public class Configuration {
         public static final String mail_password = "mail.password";
         public static final String file_template = "file.template";
         public static final String file_report_path = "file.report.path";
+        public static final String file_header = "file.header";
     }
 
     Properties properties;

@@ -5,14 +5,12 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  * Created by jakub on 27.04.16.
  */
 public class FileManager {
-
-    private Logger LOGGER = Logger.getLogger(FileManager.class.getName());
 
     private File file;
 
@@ -36,12 +34,9 @@ public class FileManager {
         return result;
     }
 
-
-
     public String getLatestReportFile(String directoryPath) {
         String ext = "csv";
-        LOGGER.info("!getTheNewestFileName.agregatedFilePath = " + directoryPath);
-        String filePath = directoryPath
+        String filePath = directoryPath;
 
         File theNewestFile = null;
         File dir = new File(filePath);
@@ -53,8 +48,27 @@ public class FileManager {
             theNewestFile = files[0];
         }
 
+        String result = "";
         if (theNewestFile != null) {
-            this.agregatedFileName = this.agregatedFilePath + theNewestFile.getName();
+            result = directoryPath + "\\" + theNewestFile.getName();
         }
+
+        return result;
+    }
+
+    public void createReportFile(String headerFileName, String reportFolderPath) throws IOException {
+        String headerText = getHeaderText(headerFileName);
+        String fileName = reportFolderPath + "\\report" + + (new Date()).getTime() + ".csv";
+        file = new File(fileName);
+        writer = new BufferedWriter(new FileWriter(file, true));
+        writer.append(headerText);
+        writer.close();
+    }
+
+    private String getHeaderText(String fileName) throws IOException {
+        file = new File(fileName);
+        reader = new BufferedReader(new FileReader(file));
+        String line = reader.readLine();
+        return line;
     }
 }

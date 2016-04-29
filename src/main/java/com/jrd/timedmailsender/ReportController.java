@@ -1,5 +1,10 @@
 package com.jrd.timedmailsender;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by jrd on 2016-04-28.
  */
@@ -11,17 +16,30 @@ public class ReportController {
 
     private MailSender mailSender;
 
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+
     public ReportController(Configuration configuration, FileManager fileManager, MailSender mailSender) {
         this.configuration = configuration;
         this.fileManager = fileManager;
         this.mailSender = mailSender;
     }
 
-    public void sendReportFile() {
+    public void sendReportFile() throws IOException, MessagingException {
+        String pathLastReport = configuration.getProperty(Configuration.Keys.file_report_path);
+        String templateFileName = configuration.getProperty(Configuration.Keys.file_template);
+        String latestReport = fileManager.getLatestReportFile(pathLastReport);
+        String template = fileManager.getTemplateFile(templateFileName);
 
+        mailSender.sendMail(prepareMailMessage(template), latestReport);
     }
 
-    public void createReportFile() {
+    public void createReportFile() throws IOException {
+        String headerFileName = configuration.getProperty(Configuration.Keys.file_header);
+        String reportFolderPath = configuration.getProperty(Configuration.Keys.file_report_path);
+        fileManager.createReportFile(headerFileName, reportFolderPath);
+    }
 
+    private String prepareMailMessage(String template) {
+        return template.replace("@data", sdf.format(new Date()));
     }
 }
