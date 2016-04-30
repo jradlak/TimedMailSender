@@ -33,6 +33,7 @@ public class MailSender {
         props.put("mail.smtp.starttls.enable", configuration.getProperty(Configuration.Keys.mail_smtp_starttls_enable));
         props.put("mail.smtp.host", configuration.getProperty(Configuration.Keys.mail_smtp_host));
         props.put("mail.smtp.port", configuration.getProperty(Configuration.Keys.mail_smtp_port));
+        props.put("mail.smtp.ssl.trust", configuration.getProperty(Configuration.Keys.mail_smtp_host));
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
