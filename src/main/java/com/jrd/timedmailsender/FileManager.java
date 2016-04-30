@@ -50,7 +50,7 @@ public class FileManager {
 
         String result = "";
         if (theNewestFile != null) {
-            result = directoryPath + "\\" + theNewestFile.getName();
+            result = directoryPath + "/" + theNewestFile.getName();
         }
 
         return result;
@@ -58,7 +58,7 @@ public class FileManager {
 
     public void createReportFile(String headerFileName, String reportFolderPath) throws IOException {
         String headerText = getHeaderText(headerFileName);
-        String fileName = reportFolderPath + "\\report" + + (new Date()).getTime() + ".csv";
+        String fileName = reportFolderPath + "/report" + + (new Date()).getTime() + ".csv";
         file = new File(fileName);
         writer = new BufferedWriter(new FileWriter(file, true));
         writer.append(headerText);

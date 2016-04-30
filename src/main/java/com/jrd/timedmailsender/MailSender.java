@@ -25,6 +25,7 @@ public class MailSender {
     }
 
     public void sendMail(String messageStr, String attachmentFileName) throws MessagingException {
+        attachmentFileName = System.getProperty("user.dir") + "/" + attachmentFileName;
         final String username = configuration.getProperty(Configuration.Keys.mail_username);
         final String password = configuration.getProperty(Configuration.Keys.mail_password);
 

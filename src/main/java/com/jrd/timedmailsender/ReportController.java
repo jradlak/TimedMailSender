@@ -40,6 +40,6 @@ public class ReportController {
     }
 
     private String prepareMailMessage(String template) {
-        return template.replace("@data", sdf.format(new Date()));
+        return template.replace("@date", sdf.format(new Date()));
     }
 }

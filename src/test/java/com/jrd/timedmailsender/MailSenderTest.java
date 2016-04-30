@@ -25,6 +25,6 @@ public class MailSenderTest {
 
     @Test
     public void testSendMail() throws MessagingException {
-        mailSender.sendMail("Test message", configuration.getProperty(Configuration.Keys.file_report_path) + "\\report_test1.csv");
+        mailSender.sendMail("Test message", configuration.getProperty(Configuration.Keys.file_report_path) + "/report_test1.csv");
     }
 }
