@@ -22,11 +22,11 @@ public class Scheduler {
 
     private ReportController reportController;
 
-    public Scheduler(ReportController reportController, long period) {
+    public Scheduler(ReportController reportController) {
         this.reportController = reportController;
     }
 
-    public ScheduledFuture<?> scheduleReport(long period) {
+    public ScheduledFuture<?> scheduleReport(long interval) {
         final Runnable reporter = new Runnable() {
             public void run() {
                 try {
@@ -41,7 +41,7 @@ public class Scheduler {
         };
 
         final ScheduledFuture<?> reportHandle = scheduler.scheduleAtFixedRate(reporter,
-                period, period, SECONDS);
+                interval, interval, SECONDS);
 
         return reportHandle;
     }

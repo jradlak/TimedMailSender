@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class ConfigurationTest {
 
-    private final static String mailServerAddres = "smtp.google.com";
+    private final static String mailServerAddres = "smtp.gmail.com";
 
     @Test
     public void configTest() throws IOException {
