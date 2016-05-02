@@ -23,12 +23,18 @@ public class TimedMailSender {
      * 2. -interval interval of task execution in seconfs
      */
     public static void main(String[] args) {
-        long interval = 1000;
+        long interval = 20;
         String configFile = "mailSender.properties";
-        if (args.length > 0) {
-            configFile = args[0];
-            if (args.length > 1) {
-                interval = Long.parseLong(args[1]);
+        if (args.length > 1) {
+            String configFileKey = args[0];
+            if (configFileKey.equals("-configFile")) {
+                configFile = args[1];
+            }
+            if (args.length > 3) {
+                String intervalKey = args[2];
+                if (intervalKey.equals("-interval")) {
+                    interval = Long.parseLong(args[3]);
+                }
             }
         }
 
@@ -41,6 +47,7 @@ public class TimedMailSender {
         Scheduler scheduler = new Scheduler(reportController);
         scheduler.scheduleReport(interval);
     }
+
 
     private static ReportController makeReportController(String configFile) throws IOException {
         Configuration configuration = new Configuration(configFile);

@@ -17,7 +17,6 @@ public class Scheduler {
 
     private Logger LOGGER = Logger.getLogger(FileManager.class.getName());
 
-
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     private ReportController reportController;
@@ -27,6 +26,7 @@ public class Scheduler {
     }
 
     public ScheduledFuture<?> scheduleReport(long interval) {
+        LOGGER.info("Scheduler started at interval = " + interval);
         final Runnable reporter = new Runnable() {
             public void run() {
                 try {

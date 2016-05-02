@@ -4,11 +4,14 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 /**
  * Created by jrd on 2016-04-28.
  */
 public class ReportController {
+
+    private static Logger LOGGER = Logger.getLogger(ReportController.class.getName());
 
     private Configuration configuration;
 
@@ -30,12 +33,14 @@ public class ReportController {
         String latestReport = fileManager.getLatestReportFile(pathLastReport);
         String template = fileManager.getTemplateFile(templateFileName);
 
+        LOGGER.info("sendReportFile, latest report = " +latestReport);
         mailSender.sendMail(prepareMailMessage(template), latestReport);
     }
 
     public void createReportFile() throws IOException {
         String headerFileName = configuration.getProperty(Configuration.Keys.file_header);
         String reportFolderPath = configuration.getProperty(Configuration.Keys.file_report_path);
+        LOGGER.info("createReportFile");
         fileManager.createReportFile(headerFileName, reportFolderPath);
     }
 
