@@ -33,7 +33,9 @@ public class ReportController {
         String latestReport = fileManager.getLatestReportFile(pathLastReport);
         String template = fileManager.getTemplateFile(templateFileName);
 
-        LOGGER.info("sendReportFile, latest report = " +latestReport);
+        LOGGER.info("sendReportFile, latest report = " + latestReport);
+        LOGGER.info("sendReportFile, file template = " + template);
+        
         mailSender.sendMail(prepareMailMessage(template), latestReport);
     }
 

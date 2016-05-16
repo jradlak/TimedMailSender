@@ -27,13 +27,14 @@ public class TimedMailSender {
         String configFile = "mailSender.properties";
         if (args.length > 1) {
             String configFileKey = args[0];
-            if (configFileKey.equals("-configFile")) {
-                configFile = args[1];
+            if (configFileKey.equals("-interval")) {
+                interval = Long.parseLong(args[1]);
             }
+
             if (args.length > 3) {
                 String intervalKey = args[2];
-                if (intervalKey.equals("-interval")) {
-                    interval = Long.parseLong(args[3]);
+                if (intervalKey.equals("-configFile")) {
+                    configFile = args[3];
                 }
             }
         }

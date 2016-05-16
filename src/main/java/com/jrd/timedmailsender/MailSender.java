@@ -25,7 +25,7 @@ public class MailSender {
     }
 
     public void sendMail(String messageStr, String attachmentFileName) throws MessagingException {
-        attachmentFileName = System.getProperty("user.dir") + "/" + attachmentFileName;
+        //attachmentFileName = System.getProperty("user.dir") + "/" + attachmentFileName;
         final String username = configuration.getProperty(Configuration.Keys.mail_username);
         final String password = configuration.getProperty(Configuration.Keys.mail_password);
 
@@ -36,6 +36,7 @@ public class MailSender {
         props.put("mail.smtp.port", configuration.getProperty(Configuration.Keys.mail_smtp_port));
         props.put("mail.smtp.ssl.trust", configuration.getProperty(Configuration.Keys.mail_smtp_host));
 
+
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -43,6 +44,7 @@ public class MailSender {
                     }
                 });
 
+        session.setDebug(true);
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(configuration.getProperty(Configuration.Keys.mail_from)));
         message.setRecipients(Message.RecipientType.TO,

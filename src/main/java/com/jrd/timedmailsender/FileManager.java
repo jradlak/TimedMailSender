@@ -61,7 +61,7 @@ public class FileManager {
         String fileName = reportFolderPath + "/report" + + (new Date()).getTime() + ".csv";
         file = new File(fileName);
         writer = new BufferedWriter(new FileWriter(file, true));
-        writer.append(headerText);
+        writer.append(headerText + "\n");
         writer.close();
     }
 
